@@ -4,11 +4,11 @@ wechat4j
 基于J2EE的微信公众平台开发包
 功能
 -----------------------------------
-1.支持所有的消息接口。
-2.支持自定义菜单。（Todo:通过页面直接制作菜单）
-3.消息分发机制，方便集中于对消息的处理。
-4.关键字分发机制。
-5.Todo:支持session
+1.支持所有的消息接口。＜/br＞
+2.支持自定义菜单。(Todo:通过页面直接制作菜单)＜/br＞
+3.消息分发机制，方便集中于对消息的处理。＜/br＞
+4.关键字分发机制。＜/br＞
+5.Todo:支持session ＜/br＞
 使用
 -----------------------------------
 step1.在web.xml中配置servlet以及微信公众平台上的token
@@ -35,7 +35,7 @@ public class ImageHandler extends Handler{
     }
 }
 ```
-step3.若要使用关键字功能，必须实现service的execute方法已经相应的分发规则
+step3.若要使用关键字功能，必须实现service的execute方法已经相应的分发规则＜/br＞
 实现WXService接口
 ```
 public class S1 implements WXService{
@@ -64,6 +64,6 @@ public class TextHandler extends Handler{
 ```
 依赖的包
 -----------------------------------
-commons-codec-1.8.jar commons-httpclient-3.1.jar
+commons-codec-1.8.jar commons-httpclient-3.1.jar＜/br＞
 gson-2.2.4.jar jdom-2.0.5.jar servlet-api.jar
 
