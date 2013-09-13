@@ -4,31 +4,21 @@ import java.io.Serializable;
 
 public class Rule implements Serializable {
 
-	private String type;
-	private String content;
+	private String value;
     private String service;
-    public Rule(String type,String content,String service){
-        this.type = type;
-        this.content = content;
+    public Rule(String value,String service){
+        this.value  = value;
         this.service = service;
     }
-    public String getType() {
-        return type;
+    public String getValue() {
+        return value;
     }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setValue(String value) {
+        this.value = value;
     }
     public String getService() {
         return service;
     }
-
     public void setService(String service) {
         this.service = service;
     }
