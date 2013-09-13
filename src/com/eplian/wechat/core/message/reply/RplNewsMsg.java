@@ -1,5 +1,6 @@
 package com.eplian.wechat.core.message.reply;
 
+import com.eplian.wechat.core.message.receive.RecvMsg;
 import com.eplian.wechat.core.message.reply.RplMsg;
 import com.eplian.wechat.core.message.reply.RplNewsMsgItem;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class RplNewsMsg extends RplMsg{
     private List<RplNewsMsgItem> items = new LinkedList<RplNewsMsgItem>();
 
-    public RplNewsMsg(RplMsg msg) {
+    public RplNewsMsg(RecvMsg msg) {
         super(msg);
         setMsgType("news");
     }

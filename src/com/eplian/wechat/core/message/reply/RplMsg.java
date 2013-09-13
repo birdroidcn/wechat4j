@@ -1,5 +1,6 @@
 package com.eplian.wechat.core.message.reply;
 
+import com.eplian.wechat.core.message.receive.RecvMsg;
 /**
  * Created with IntelliJ IDEA.
  * User: www
@@ -20,12 +21,9 @@ public class RplMsg extends Msg{
         this.star = star;
     }
 
-    public RplMsg(Msg msg) {
-        this(msg.getToUser(),msg.getFromUser(),msg.getCreateDt(),msg.getMsgType(),false);
-    }
-
-    public RplMsg(RplMsg msg) {
-        this(msg.getToUser(), msg.getFromUser(), msg.getCreateDt(), msg.getMsgType(), msg.isStar());
+    public RplMsg(RecvMsg msg) {
+        this(msg.get("FromUserName"),msg.get("ToUserName"),
+                (System.currentTimeMillis() / 1000)+"","",false);
     }
 
     public boolean isStar() {

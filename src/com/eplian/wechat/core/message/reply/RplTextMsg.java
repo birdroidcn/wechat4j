@@ -1,6 +1,7 @@
 package com.eplian.wechat.core.message.reply;
 
 import com.eplian.wechat.core.message.reply.RplMsg;
+import com.eplian.wechat.core.message.receive.RecvMsg;
 import org.jdom2.Document;
 
 
@@ -14,7 +15,7 @@ import org.jdom2.Document;
 public class RplTextMsg extends RplMsg{
     private String content;
 
-    public RplTextMsg(RplMsg msg,String content) {
+    public RplTextMsg(RecvMsg msg,String content) {
         super(msg);
         setMsgType("text");
         this.content = content;

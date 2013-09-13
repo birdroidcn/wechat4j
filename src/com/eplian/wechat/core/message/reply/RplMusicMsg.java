@@ -1,5 +1,6 @@
 package com.eplian.wechat.core.message.reply;
 
+import com.eplian.wechat.core.message.receive.RecvMsg;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
@@ -18,7 +19,7 @@ public class RplMusicMsg extends RplMsg{
     private String description;
     private String title;
 
-    public RplMusicMsg(RplMsg msg,String title,String description,String musicUrl,String hqMusicUrl) {
+    public RplMusicMsg(RecvMsg msg,String title,String description,String musicUrl,String hqMusicUrl) {
         super(msg);
         setMsgType("music");
         this.title = title;
