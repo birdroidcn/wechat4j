@@ -17,18 +17,12 @@ import java.util.Iterator;
 
 public class Dispatcher {
     private WXService serivce = null;
-    public Dispatcher(RecvMsg msg,List<Rule> rules){
-        String type = msg.getMsgType();
-        String content =  msg.getContent();
+    public Dispatcher(String value,List<Rule> rules){
         //遍历规则
         Iterator it = rules.iterator();
         while (it.hasNext()){
             Rule rule = (Rule)it.next();
-            if(rule.getType().equals(type)){
-                if(type.equals("text")
-                        && !rule.getContent().equals("")
-                        && !rule.getContent().equals(content))
-                    continue;
+            if(rule.getValue().equals(value)){
                 try{
                     Class<?> serviceClass = Class.forName(rule.getService());
                     this.serivce = (WXService)serviceClass.newInstance();
