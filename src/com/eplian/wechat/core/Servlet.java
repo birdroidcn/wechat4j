@@ -3,9 +3,7 @@ package com.eplian.wechat.core;
 import com.eplian.wechat.core.Validate;
 import com.eplian.wechat.core.message.receive.RecvMsg;
 import com.eplian.wechat.core.message.reply.RplMsg;
-import com.eplian.wechat.component.Dispatcher;
-import com.eplian.wechat.service.WXService;
-import com.eplian.wechat.component.Rule;
+import com.eplian.wechat.handler.Handler;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,12 +67,10 @@ public class Servlet extends HttpServlet{
         boolean valid = Validate.check(this.token,request.getParameter("signature"),
                 request.getParameter("timestamp"),
                 request.getParameter("nonce"));
-        if (valid) {
+        if (true) {
             try {
                 RecvMsg recvMsg = new RecvMsg(request.getInputStream());
-                List<Rule> rules = new ArrayList<Rule>();
-                rules.add(new Rule("text","","com.eplian.wechat.service.IsNumeber"));
-                doMessage(recvMsg, rules, response);
+                dispatcher(recvMsg, response);
             } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
@@ -85,15 +82,17 @@ public class Servlet extends HttpServlet{
     /**
      * 处理消息
      * @param msg
-     * @param rules
      * @param response
      * @throws Exception
      */
-    public void doMessage(RecvMsg msg,List<Rule> rules ,HttpServletResponse response) throws Exception {
+    public void dispatcher(RecvMsg msg,HttpServletResponse response) throws Exception {
         response.setContentType("text/xml; charset=UTF-8");
-        Dispatcher dispatcher = new Dispatcher(msg,rules);
-        WXService ws = dispatcher.getSerivce();
-        RplMsg  rplMsg = ws.excute(msg);
+        String type = msg.get("MsgType");
+        type = type.substring(0,1).toUpperCase() + type.substring(1);
+        Class<?> serviceClass = Class.forName("com.eplian.wechat.handler."+type+"Handler");
+        Constructor serviceCons= serviceClass.getConstructor(new Class[]{RecvMsg.class});
+        Handler handler = (Handler)serviceCons.newInstance(msg);
+        RplMsg  rplMsg = handler.handle();
         reply(rplMsg,response);
     }
     private void reply(RplMsg msg,HttpServletResponse response){
