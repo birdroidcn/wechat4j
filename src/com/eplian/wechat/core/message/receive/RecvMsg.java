@@ -35,12 +35,12 @@ public class RecvMsg {
 
     private void parseMsg(Document document){
         Element root = document.getRootElement();
-        Iterator it_attr = root.getAttributes().iterator();
+        Iterator it_attr = root.getChildren().iterator();
         while (it_attr.hasNext()) {
-            Attribute attribute = (Attribute) it_attr.next();
-            String attrname = attribute.getName();
-            String attrvalue = root.getAttributeValue(attrname);
-            map.put( attrname, attrvalue);
+            Element element = (Element) it_attr.next();
+            String name = element.getName();
+            String value = element.getTextTrim();
+            map.put( name, value);
         }
     }
     /**
