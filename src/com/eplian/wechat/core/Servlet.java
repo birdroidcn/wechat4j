@@ -67,7 +67,7 @@ public class Servlet extends HttpServlet{
         boolean valid = Validate.check(this.token,request.getParameter("signature"),
                 request.getParameter("timestamp"),
                 request.getParameter("nonce"));
-        if (true) {
+        if (valid) {
             try {
                 RecvMsg recvMsg = new RecvMsg(request.getInputStream());
                 dispatcher(recvMsg, response);
