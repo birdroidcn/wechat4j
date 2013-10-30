@@ -6,9 +6,9 @@ wechat4j
 -----------------------------------
 1.支持所有的消息接口。
 
-2.支持自定义菜单。(Todo:通过页面直接制作菜单)
+2.支持自定义菜单,**新增页面方式自定义菜单**。
 
-3.消息分发机制，方便集中于对消息的处理。
+3.消息分发机制，方便集中对消息的处理。
 
 4.关键字分发机制。
 
@@ -71,5 +71,6 @@ public class TextHandler extends Handler{
 依赖的包
 -----------------------------------
 commons-codec-1.8.jar commons-httpclient-3.1.jar
+
 gson-2.2.4.jar jdom-2.0.5.jar servlet-api.jar
 
