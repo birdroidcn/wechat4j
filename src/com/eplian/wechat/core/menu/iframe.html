@@ -1,0 +1,27 @@
+<head>
+    <link media="all" href="https://a.alipayobjects.com/alice/one/1.1.0/one.css" rel="stylesheet">
+
+</head>
+<form class="ui-form" method="get" action="https://api.weixin.qq.com/cgi-bin/token">
+    <fieldset>
+        <input name="grant_type" type="hidden" value="client_credential">
+        <div class="ui-form-item">
+            <label for="" class="ui-label">
+                <span class="ui-form-required">*</span>AppId
+            </label>
+            <input class="ui-input" type="text" name="appid">
+        </div>
+
+        <div class="ui-form-item">
+            <label for="" class="ui-label">
+                <span class="ui-form-required">*</span>AppSecret
+            </label>
+            <input class="ui-input" type="text" name="secret">
+        </div>
+
+        <div class="ui-form-item">
+            <input type="submit" class="ui-button  ui-button-morange " value="获取Token">
+        </div>
+
+    </fieldset>
+</form>
