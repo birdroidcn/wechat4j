@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link media="all" href="https://a.alipayobjects.com/alice/one/1.1.0/one.css" rel="stylesheet">
+    <link media="all" href="http://aliceui.org/box/src/box.css" rel="stylesheet">
+
+    <style type="text/css">
+        #body-wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1040px;
+            padding-top: 20px;
+            zoom: 1;
+        }
+        #sample {
+            width: 291px;
+            height: 500px;
+            background: url(./New.jpg);
+            margin: 0 auto;
+            position: relative;
+        }
+        .wx-menu{
+            height: 30px;
+            width: 230px;
+            position: absolute;
+            left: 50px;
+            bottom: 4px;
+        }
+        .wx-button{
+            width: 33%;
+            height: 100%;
+            float: left;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+        }
+        iframe {
+            display: block;
+            width: 100%;
+            height: 160px;
+            border: 0;
+        }
+    </style>
+    <title>test</title>
+    <script charset="utf-8" id="seajsnode"src="http://static.alipayobjects.com/seajs/??seajs/2.1.1/sea.js,seajs-combo/1.0.0/seajs-combo.js,seajs-style/1.0.0/seajs-style.js"></script>
+</head>
+<body>
+<div id="body-wrapper">
+    <div class="ui-grid-row">
+        <div class="ui-grid-15">
+            <!--Body content-->
+            <div id="sample">
+                <div class="wx-menu">
+                    <div class="wx-button" data-index='0'></div>
+                    <div class="wx-button" data-index='1'></div>
+                    <div class="wx-button" data-index='2'></div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-grid-10" >
+            <div class="ui-box">
+                <div class="ui-box-head">
+                    <h3 class="ui-box-head-title">第一步</h3>
+                    <span class="ui-box-head-text">获取Token</span>
+                </div>
+                <div class="ui-box-container">
+                    <div class="ui-box-content">
+                        <iframe src="./iframe.html"> </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-box ui-box-follow">
+                <div class="ui-box-head">
+                    <h3 class="ui-box-head-title">第二步</h3>
+                    <span class="ui-box-head-text">点左图下方添加按钮，然后创建</span>
+                </div>
+                <div class="ui-box-container">
+                    <div class="ui-box-content">
+                        <form method="POST" target="hidden" id="menu-fm" action="">
+                            <fieldset>
+                                <div class="ui-form-item">
+                                    <label for="" class="ui-label">
+                                        <span class="ui-form-required">*</span>Access_token
+                                    </label>
+                                    <input class="ui-input" type="text"  data-name="access_token">
+                                    <p class="ui-form-explain">复制上步的access_token字段</p>
+                                </div>
+                                <input type="hidden" name="body" />
+                                <div class="ui-form-item">
+                                    <input type="submit" class="ui-button  ui-button-morange" id="create" value="创建菜单">
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    <iframe name="hidden" src=""style="display: none"> </iframe>
+                    </div>
+                    <div  style="display: none">
+                        <form id="check-fm" target="result" method="get" action="https://api.weixin.qq.com/cgi-bin/menu/get">
+                             <input name="access_token"/>
+                        </form>
+                    </div >
+                </div>
+            </div>
+            <div class="ui-box ui-box-follow fn-hide" id="result">
+                <div class="ui-box-head">
+                    <h3 class="ui-box-head-title">结果</h3>
+                    <span class="ui-box-head-text">显示成功的JSON，不成功显示错误</span>
+                </div>
+                <div class="ui-box-container">
+                    <div class="ui-box-content">
+                        <div class="ui-loading" style="margin: 0 auto"></div>
+                        <iframe name="result" src=""> </iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="box" class="fn-hide">
+    <div class="ui-box" id="dialog">
+        <div class="ui-box-head">
+            <h3 class="ui-box-head-title">添加按钮</h3>
+        </div>
+        <div class="ui-box-container">
+            <div class="ui-box-content">
+                <div class="ui-form-item">
+                    <label for="" class="ui-label">
+                        按钮名称
+                    </label>
+                    <input class="ui-input" name="name" type="text">
+                </div>
+                <div class="ui-form-item">
+                    <label for="" class="ui-label">是否有子菜单</label>
+                    <select id="sub_button" name="sub_button">
+                        <option value="yes">
+                            有
+                        </option>
+                        <option value="no">
+                            无
+                        </option>
+                    </select>
+                </div>
+                <div class="ui-form-item">
+                    <label for="" class="ui-label">按钮类型</label>
+                    <select  name="type">
+                        <option value="click">
+                            click
+                        </option>
+                        <option value="view">
+                            view
+                        </option>
+                    </select>
+                </div>
+                <div class="ui-form-item">
+                    <label for="" class="ui-label">
+                        按键值
+                    </label>
+                    <input class="ui-input" name="key" type="text">
+                </div>
+                <div class="ui-form-item">
+                    <a href="javascript:;" id="dialog-bt" class="ui-button ui-button-lorange">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    define("add/button",['arale/dialog/1.2.2/dialog','arale/dialog/1.2.2/dialog.css','arale/tip/1.2.0/tip','gallery/json/1.0.3/json','alice/loading/1.0.0/loading.css'],function(require,exports,module){
+        var $ = require('$');
+        var Dialog = require('arale/dialog/1.2.2/dialog');
+        var Tip = require('arale/tip/1.2.0/tip');
+        var JSON = require('gallery/json/1.0.3/json');
+        var tips = [],
+            index = 0;
+        for(var i=0;i<3;i++){
+            tips.push(new Tip({
+                trigger: $('.wx-button').eq(i),
+                content: '添加按钮',
+                effect: 'fade',
+                arrowPosition: 7,
+                duration: 100
+            }));
+        }
+        $('.wx-button').click(function(e){
+            index = parseInt($(this).attr('data-index'));
+        });
+        var menu = {
+            "button":[]
+        };
+
+        var dialog = new Dialog({
+            trigger: '.wx-button',
+            content: $('#box .ui-box')
+        });
+
+        $('#dialog-bt').click(function(e){
+            var button = {};
+            $('#dialog [name]').each(function(){
+                button[$(this).attr('name')] = $(this).val();
+            });
+            button.sub_button = button.sub_button == 'yes' ? []:undefined;
+            if(typeof menu.button[index] != 'undefined'){
+                menu.button[index].sub_button.push(button);
+                var content = '';
+                $.each( menu.button[index].sub_button, function(i, n){
+                    content += '<div>'+ n.name +'</div>';
+                });
+                content += '<div>添加按钮</div>';
+                tips[index].set('content',content);
+            }else{
+                menu.button.push(button);
+                $('.wx-button').eq(index).text(button.name);
+            }
+            dialog.hide();
+        });
+        $('select[name="type"]').change(function(){
+            if(this.value == 'view'){
+                var jd =  $('input[name="key"]');
+                jd.attr('name','url');
+                jd.siblings('label').text('链接');
+            }
+        });
+        //提交表单
+        $('#create').click(function(){
+            var fm = $('#menu-fm');
+            var action = 'http://mp.weixin.qq.com/debug/cgi-bin/apiagent?method=POST&body=0';
+            var token = $('[data-name="access_token"]',fm).val();
+            var url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='+token;
+            action = action + "&url=" + encodeURIComponent(url);
+            $('[name="body"]',fm).val(JSON.stringify(menu));
+            fm.attr('action',action);
+            fm.trigger("submit");
+            //查看是否成功
+            $('#result').removeClass("fn-hide");
+            setTimeout(function(){
+                $('#check-fm [name]').val(token);
+                $('#check-fm').trigger("submit");
+                $('.ui-loading').removeClass('ui-loading')
+            },500)
+        });
+
+    });
+</script>
+<script>
+    seajs.config({
+        alias: {
+            '$': 'gallery/jquery/1.7.2/jquery'
+        }
+    });
+    seajs.use(['$','add/button'], function($) {
+
+    });
+</script>
+
+</body>
+</html>
