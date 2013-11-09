@@ -8,9 +8,9 @@ wechat4j
 
 2.支持自定义菜单,**新增页面方式自定义菜单**。
 
-3.消息分发机制，方便集中对消息的处理。
+3.消息分发机制，方便对不同类型消息的处理。
 
-4.关键字分发机制。
+4.关键字分发机制，**新增正则匹配、省缺规则**。
 
 5.Todo:支持session
 
@@ -35,12 +35,13 @@ public class ImageHandler extends Handler{
     }
     public RplMsg handle(){
         //add your business
-        RplTextMsg rplTextMsg = new RplTextMsg(this.msg,"");//此处返回文字消息
+        String picUrl = this.msg.get("PicUrl");//接受到的消息参数均与开放平台一致
+        RplTextMsg rplTextMsg = new RplTextMsg(this.msg,"收到");//此处返回文字消息
         return rplTextMsg;
     }
 }
 ```
-step3.若要使用关键字功能，必须实现service的execute方法已经相应的分发规则
+step3.若要使用关键字功能，需实现WXService的execute方法、定制分发规则
 
 实现WXService接口
 ```
@@ -60,8 +61,12 @@ public class TextHandler extends Handler{
     public RplMsg handle(){
         //关键字转发 or add your business
         List<Rule> rules = new ArrayList<Rule>();
-        rules.add(new Rule("1","com.eplian.wechat.service.S1")); //数据库读出
-        rules.add(new Rule("2","com.eplian.wechat.service.S2"));
+        //Rule构造方法第一个参数为要匹配的关键字
+        //第二个为要转发到的服务，如果未实现WXService接口，则直接当作字符串返回
+        //第三个为是否启用正则匹配
+        rules.add(new Rule("^[1-4]","com.eplian.wechat.service.S1",true));
+        rules.add(new Rule("5","收到留言",false));
+        rules.add(new Rule("default","com.eplian.wechat.service.S2",false));//省缺规则
         RplMsg rplMsg=  this.dispatcher(rules);
 
         return rplMsg;

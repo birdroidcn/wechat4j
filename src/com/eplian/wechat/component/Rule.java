@@ -6,9 +6,11 @@ public class Rule implements Serializable {
 
 	private String value;
     private String service;
-    public Rule(String value,String service){
+    private boolean isRegExp;
+    public Rule(String value,String service,boolean isRegExp){
         this.value  = value;
         this.service = service;
+        this.isRegExp = isRegExp;
     }
     public String getValue() {
         return value;
@@ -21,5 +23,11 @@ public class Rule implements Serializable {
     }
     public void setService(String service) {
         this.service = service;
+    }
+    public boolean getIsRegExp() {
+        return isRegExp;
+    }
+    public void setIsRegExp(boolean isRegExp) {
+        this.isRegExp = isRegExp;
     }
 }
